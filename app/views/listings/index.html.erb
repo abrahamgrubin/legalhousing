@@ -28,6 +28,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
+<script src="assets/javascripts/bostonMap.js"></script>
 <body>
 
   <!-- Primary Page Layout
@@ -45,8 +46,7 @@
         </div>
       </div>
     </div>
-    <div class="container">
-      <button id="click-button">Button</button>
+<div class="container">
   <table>
     <tr id="headers">
       <th class="heading-label">heading</th>
@@ -74,6 +74,7 @@
 
   </div>
   <div id="viz"></div>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script src="//d3plus.org/js/d3.js"></script>
   <script src="//d3plus.org/js/d3plus.js"></script>
 
@@ -86,6 +87,50 @@
         .id("name")
         .size("value")
         .draw()
+        var width = 700,
+            height = 580;
+        var div = d3.select("body").append("div")
+          .attr("class", "tooltip")
+          .style("opacity", 0);
+        var svg = d3.select( "body" )
+          .append( "svg" )
+          .attr( "width", width )
+          .attr( "height", height );
+        var neighborhoods = svg.append( "g" ).attr( "id", "neighborhoods" );
+        var albersProjection = d3.geo.albers()
+          .scale( 190000 )
+          .rotate( [71.057,0] )
+          .center( [0, 42.313] )
+          .translate( [width/2,height/2] );
+        var geoPath = d3.geo.path()
+            .projection( albersProjection );
+        neighborhoods.selectAll( "path" )
+          .data( neighborhoods_json.features )
+          .enter()
+          .append( "path" )
+          .attr( "d", geoPath );
+        // var housing = svg.append( "g" ).attr( "id", "housing" );
+        // housing.selectAll( "path" )
+        //   .data( housing_json.features )
+        //   .enter()
+        //   .append( "path" )
+        //   .attr( "d", geoPath )
+        //   .on("mouseover", function(d) {
+        //     div.transition()
+        //         .duration(200)
+        //         .style("opacity", .9);
+        //     div	.html(formatTime(d.date) + "<br/>"  + d.close)
+        //         .style("left", (d3.event.pageX) + "px")
+        //         .style("top", (d3.event.pageY - 28) + "px");
+        //     path.transition()
+        //         .duration(200)
+        //         .style("opacity", .5);
+        //     })
+        //     .on("mouseout", function(d) {
+        //         div.transition()
+        //         .duration(500)
+        //         .style("opacity", 0);
+        //     });
   </script>
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->

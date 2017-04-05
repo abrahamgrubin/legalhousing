@@ -4,3 +4,37 @@
 .housing-column.hidden {
   display: none;
 }
+#neighborhoods path:nth-child(2n){
+  fill: #01295F;
+  stroke: #fff;
+}
+#neighborhoods path:nth-child(3n){
+  fill: #C1DFF0;
+
+}
+#neighborhoods path{
+    fill: #88CCF1;
+    stroke: #fff;
+}
+/*#neighborhoods path:hover{
+    fill: #00798C;
+}*/
+#housing path{
+  fill: #fff;
+  stroke: #999;
+}
+#housing path:hover{
+  fill: black;
+}
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 28px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}

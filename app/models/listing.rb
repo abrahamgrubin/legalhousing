@@ -13,8 +13,9 @@ class Listing < ApplicationRecord
         return false
     end
   end
-  
+
   def self.discriminatory
     Listing.all.select {|listing| listing.discriminatory == true}
   end
+
 end
