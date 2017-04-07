@@ -19,13 +19,11 @@
 /*#neighborhoods path:hover{
     fill: #00798C;
 }*/
-#housing path{
-  fill: #fff;
+#dListing path{
+  fill: #ff0000;
   stroke: #999;
 }
-#housing path:hover{
-  fill: black;
-}
+
 div.tooltip {
     position: absolute;
     text-align: center;

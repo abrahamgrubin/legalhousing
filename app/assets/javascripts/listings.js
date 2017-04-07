@@ -28,23 +28,26 @@ function drawPieChart(data){
 }
 
 function mapOfBoston(data){
-  var newArr = [];
+  var discriminatoryPoints = {
+    type: 'FeatureCollection',
+    features: []
+  }
   for (var key in data) {
     var discriminatory = data[key].discriminatory,
     latitude = data[key].latitude;
-
-    if (discriminatory && latitude) {
-      if(latitude != 5.5)
-      newArr.push({
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [data[key].latitude, data[key].longitude]
-        }
-    })
-      console.log(newArr);
+    if (discriminatory && latitude && latitude != 5.5){
+    var newPoint = {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [data[key].latitude, data[key].longitude],
+        properties: data[key]
+      }
+    }
+    discriminatoryPoints.features.push(newPoint);
   }
 }
+console.log(discriminatoryPoints.features);
   var width = 700,
       height = 580;
   var div = d3.select("body").append("div")
@@ -80,12 +83,14 @@ function mapOfBoston(data){
             .duration(500)
             .style("opacity", 0);
         });
-    var discLocation = d3.select( "body" )
-          .append( "svg" )
-          .attr('width', '40px')
-          .attr('height', '40px');
-    var drawIt = discLocation.append( "g" )
+        var dListing = svg.append( "g" ).attr( "id", "dListing" );
+        dListing.selectAll( "path" )
+          .data(discriminatoryPoints.features)
+          .enter()
+          .append( "path" )
+          .attr( "d", geoPath );
   }
+
 $(document).ready(function(){
   loadData();
 });
