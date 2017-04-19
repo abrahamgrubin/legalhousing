@@ -9,3 +9,9 @@ Overview
 Files
 ------
 flagModel.RMD --> script that processes data to identify discriminatory listings.
+
+------
+Setting up the app:
+  To grab the real data:
+    In the command line run: 
+    `python script_filename int`
